@@ -11,7 +11,7 @@ namespace week3.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        static List<Models.Movie> movies = new List<Models.Movie>()
+        static List<Models.Movie> listamovies = new List<Models.Movie>()
         {
             new Models.Movie() { ID = Guid.NewGuid(), Name = "Movie 1", Year = 2020, Lenght = "2 ore" },
             new Models.Movie() { ID = Guid.NewGuid(), Name = "Movie 1", Year = 2020, Lenght = "2 ore" },
@@ -23,7 +23,7 @@ namespace week3.Controllers
         [HttpGet]
         public Models.Movie[] Get()
         {
-            return movies.ToArray();
+            return listamovies.ToArray();
         }
 
         [HttpPost]
@@ -32,22 +32,23 @@ namespace week3.Controllers
             if (moviee.ID == Guid.Empty)
                 moviee.ID = Guid.NewGuid();
 
-            movies.Add(moviee);
+            listamovies.Add(moviee);
         }
 
         [HttpPut]
         public void Put([FromBody] Models.Movie moviee)
         {
-            Models.Movie currentMovie = movies.FirstOrDefault(x => x.ID == moviee.ID);
+            Models.Movie currentMovie = listamovies.FirstOrDefault(x => x.ID == moviee.ID);
             currentMovie.Name = moviee.Name;
         }
 
         [HttpDelete]
         public void Delete(Guid id)
         {
-            movies.RemoveAll(movie => movie.ID == id);
+            listamovies.RemoveAll(movie => movie.ID == id);
 
         }
+
     }
 }
 
